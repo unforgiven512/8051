@@ -1,0 +1,57 @@
+#
+# .gitattributes
+#
+
+# Auto detect text files and perform LF normalization
+*					text=auto
+
+# HDL
+*.v					eol=lf
+*.sv				eol=lf
+*.vh				eol=lf
+*.verilog			eol=lf
+*.vhd				eol=lf
+*.vhdl				eol=lf
+*.sdc				eol=lf
+*.xdc				eol=lf
+*.ucf				eol=lf
+*.tcl				eol=lf
+
+# Source Files
+*.c					eol=lf diff=cpp
+*.h					eol=lf diff=cpp
+*.cpp				eol=lf diff=cpp
+*.hpp				eol=lf diff=cpp
+*.cxx				eol=lf diff=cpp
+*.hxx				eol=lf diff=cpp
+*.cc				eol=lf diff=cpp
+*.hh				eol=lf diff=cpp
+*.c++				eol=lf diff=cpp
+*.h++				eol=lf diff=cpp
+*.ino				eol=lf diff=cpp
+*.pde				eol=lf diff=cpp
+
+*.asm				eol=lf
+*.ASM				eol=lf
+*.s					eol=lf
+*.S					eol=lf
+*.inc				eol=lf
+*.INC				eol=lf
+
+Makefile			eol=lf
+*.makefile			eol=lf
+*.make				eol=lf
+*.mk				eol=lf
+
+
+# Standard to msysgit
+*.doc				diff=astextplain
+*.DOC				diff=astextplain
+*.docx				diff=astextplain
+*.DOCX				diff=astextplain
+*.dot				diff=astextplain
+*.DOT				diff=astextplain
+*.pdf				diff=astextplain
+*.PDF				diff=astextplain
+*.rtf				diff=astextplain
+*.RTF				diff=astextplain
