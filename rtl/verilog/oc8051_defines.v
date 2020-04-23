@@ -46,12 +46,13 @@
 //
 
 //
-// oc8051 pherypherals
+// oc8051 pheripherals
 //
+
 `define OC8051_UART
 `define OC8051_TC01
 `define OC8051_TC2
-`define OC8051_PORTS  //ports global enable
+`define OC8051_PORTS  // ports global enable
 `define OC8051_PORT0
 `define OC8051_PORT1
 `define OC8051_PORT2
@@ -59,40 +60,43 @@
 
 
 //
-// oc8051 ITERNAL ROM
+// oc8051 INTERNAL ROM
 //
+
 //`define OC8051_ROM
 
 
 //
 // oc8051 memory
 //
+
 //`define OC8051_CACHE
 //`define OC8051_WB
 
 //`define OC8051_RAM_XILINX
 //`define OC8051_RAM_VIRTUALSILICON
 `define OC8051_RAM_GENERIC
-
-
 `define OC8051_XILINX_ROM
+
 
 //
 // oc8051 simulation defines
 //
+
 //`define OC8051_SIMULATION
 //`define OC8051_SERIAL
+
 
 //
 // oc8051 bist
 //
+
 //`define OC8051_BIST
 
 
 //
 // operation codes for alu
 //
-
 
 `define OC8051_ALU_NOP 4'b0000
 `define OC8051_ALU_ADD 4'b0001
@@ -110,6 +114,7 @@
 `define OC8051_ALU_RRC 4'b1101
 `define OC8051_ALU_INC 4'b1110
 `define OC8051_ALU_XCH 4'b1111
+
 
 //
 // sfr addresses
@@ -132,23 +137,16 @@
 `define OC8051_SFR_TL0 8'h8a // timer/counter 0 low bits
 `define OC8051_SFR_TH1 8'h8d // timer/counter 1 high bits
 `define OC8051_SFR_TL1 8'h8b // timer/counter 1 low bits
-
 `define OC8051_SFR_SCON 8'h98 // serial control 0
 `define OC8051_SFR_SBUF 8'h99 // serial data buffer 0
 `define OC8051_SFR_SADDR 8'ha9 // serila address register 0
 `define OC8051_SFR_SADEN 8'hb9 // serila address enable 0
-
 `define OC8051_SFR_PCON 8'h87 // power control
 `define OC8051_SFR_SP 8'h81 // stack pointer
-
-
-
 `define OC8051_SFR_IE 8'ha8 // interrupt enable
 `define OC8051_SFR_IP 8'hb7 // interrupt priority
-
 `define OC8051_SFR_RCAP2H 8'hcb // timer 2 capture high
 `define OC8051_SFR_RCAP2L 8'hca // timer 2 capture low
-
 `define OC8051_SFR_T2CON 8'hc8 // timer 2 control register
 `define OC8051_SFR_TH2 8'hcd // timer 2 high
 `define OC8051_SFR_TL2 8'hcc // timer 2 low
@@ -158,6 +156,7 @@
 //
 // sfr bit addresses
 //
+
 `define OC8051_SFR_B_ACC 5'b11100 //accumulator
 `define OC8051_SFR_B_PSW 5'b11010 //program status word
 `define OC8051_SFR_B_P0  5'b10000 //port 0
@@ -173,23 +172,25 @@
 
 
 //
-//carry input in alu
+// carry input in alu
 //
+
 `define OC8051_CY_0 2'b00 // 1'b0;
 `define OC8051_CY_PSW 2'b01 // carry from psw
 `define OC8051_CY_RAM 2'b10 // carry from ram
 `define OC8051_CY_1 2'b11 // 1'b1;
 `define OC8051_CY_DC 2'b00 // carry from psw
 
+
 //
 // instruction set
 //
 
-//op_code [4:0]
+// op_code [4:0]
 `define OC8051_ACALL 8'bxxx1_0001 // absolute call
 `define OC8051_AJMP 8'bxxx0_0001 // absolute jump
 
-//op_code [7:3]
+// op_code [7:3]
 `define OC8051_ADD_R 8'b0010_1xxx // add A=A+Rx
 `define OC8051_ADDC_R 8'b0011_1xxx // add A=A+Rx+c
 `define OC8051_ANL_R 8'b0101_1xxx // and A=A^Rx
@@ -207,7 +208,7 @@
 `define OC8051_XCH_R 8'b1100_1xxx // exchange A<->Rn
 `define OC8051_XRL_R 8'b0110_1xxx // XOR A=A XOR Rn
 
-//op_code [7:1]
+// op_code [7:1]
 `define OC8051_ADD_I 8'b0010_011x // add A=A+@Ri
 `define OC8051_ADDC_I 8'b0011_011x // add A=A+@Ri+c
 `define OC8051_ANL_I 8'b0101_011x // and A=A^@Ri
@@ -227,7 +228,7 @@
 `define OC8051_XCHD 8'b1101_011x // exchange digit A<->Ri
 `define OC8051_XRL_I 8'b0110_011x // XOR A=A XOR @Ri
 
-//op_code [7:0]
+// op_code [7:0]
 `define OC8051_ADD_D 8'b0010_0101 // add A=A+(direct)
 `define OC8051_ADD_C 8'b0010_0100 // add A=A+constant
 `define OC8051_ADDC_D 8'b0011_0101 // add A=A+(direct)+c
@@ -308,6 +309,7 @@
 //
 // default values (used after reset)
 //
+
 `define OC8051_RST_PC 23'h0 // program counter
 `define OC8051_RST_ACC 8'h00 // accumulator
 `define OC8051_RST_B 8'h00 // b register
@@ -330,12 +332,8 @@
 `define OC8051_RST_SCON 8'b0000_0000 // serial control
 `define OC8051_RST_SBUF 8'b0000_0000 // serial data buffer
 `define OC8051_RST_PCON 8'b0000_0000 // power control register
-
-
-
 `define OC8051_RST_RCAP2H 8'h00 // timer 2 capture high
 `define OC8051_RST_RCAP2L 8'h00 // timer 2 capture low
-
 `define OC8051_RST_T2CON 8'h00 // timer 2 control register
 `define OC8051_RST_T2MOD 8'h00 // timer 2 mode control
 `define OC8051_RST_TH2 8'h00 // timer 2 high
@@ -345,6 +343,7 @@
 //
 // alu source 1 select
 //
+
 `define OC8051_AS1_RAM  3'b000 // RAM
 `define OC8051_AS1_OP1  3'b111 //
 `define OC8051_AS1_OP2  3'b001 //
@@ -357,16 +356,18 @@
 //
 // alu source 2 select
 //
+
 `define OC8051_AS2_RAM   3'b00 // RAM
 `define OC8051_AS2_ACC   3'b01 // accumulator
 `define OC8051_AS2_ZERO  3'b10 // 8'h00
 `define OC8051_AS2_OP2   3'b11 //
-
 `define OC8051_AS2_DC    3'b00 //
+
 
 //
 // alu source 3 select
 //
+
 `define OC8051_AS3_DP   1'b0 // data pointer
 `define OC8051_AS3_PC   1'b1 // program clunter
 //`define OC8051_AS3_PCU  3'b101 // program clunter not registered
@@ -374,8 +375,9 @@
 
 
 //
-//write sfr
+// write sfr
 //
+
 `define OC8051_WRS_N    2'b00  //no
 `define OC8051_WRS_ACC1 2'b01  // acc destination 1
 `define OC8051_WRS_ACC2 2'b10  // acc destination 2
@@ -390,13 +392,12 @@
 `define OC8051_RRS_I    3'b001 // indirect addressing (op2)
 `define OC8051_RRS_D    3'b010 // direct addressing
 `define OC8051_RRS_SP   3'b011 // stack pointer
-
 `define OC8051_RRS_B    3'b100 // b register
 `define OC8051_RRS_DPTR 3'b101 // data pointer
 `define OC8051_RRS_PSW  3'b110 // program status word
 `define OC8051_RRS_ACC  3'b111 // acc
-
 `define OC8051_RRS_DC 3'b000 // don't c
+
 
 //
 // ram write select
@@ -411,9 +412,11 @@
 `define OC8051_RWS_B  3'b111 // b register
 `define OC8051_RWS_DC 3'b000 //
 
+
 //
 // pc in select
 //
+
 `define OC8051_PIS_DC  3'b000 // dont c
 `define OC8051_PIS_AL  3'b000 // alu low
 `define OC8051_PIS_AH  3'b001 // alu high
@@ -423,9 +426,11 @@
 `define OC8051_PIS_I16 3'b101 // 16 bit immediate
 `define OC8051_PIS_ALU 3'b110 // alu destination {des2, des1}
 
+
 //
 // compare source select
 //
+
 `define OC8051_CSS_AZ  2'b00 // eq = accumulator == zero
 `define OC8051_CSS_DES 2'b01 // eq = destination == zero
 `define OC8051_CSS_CY  2'b10 // eq = cy
@@ -436,33 +441,40 @@
 //
 // pc Write
 //
+
 `define OC8051_PCW_N 1'b0 // not
 `define OC8051_PCW_Y 1'b1 // yes
 
+
 //
-//psw set
+// psw set
 //
+
 `define OC8051_PS_NOT 2'b00 // DONT
 `define OC8051_PS_CY 2'b01 // only carry
 `define OC8051_PS_OV 2'b10 // carry and overflov
 `define OC8051_PS_AC 2'b11 // carry, overflov an ac...
 
+
 //
 // rom address select
 //
+
 `define OC8051_RAS_PC 1'b0 // program counter
 `define OC8051_RAS_DES 1'b1 // alu destination
 
 ////
 //// write accumulator
 ////
+
 //`define OC8051_WA_N 1'b0 // not
 //`define OC8051_WA_Y 1'b1 // yes
 
 
 //
-//memory action select
+// memory action select
 //
+
 `define OC8051_MAS_DPTR_R 3'b000 // read from external rom: acc=(dptr)
 `define OC8051_MAS_DPTR_W 3'b001 // write to external rom: (dptr)=acc
 `define OC8051_MAS_RI_R   3'b010 // read from external rom: acc=(Ri)
@@ -505,6 +517,7 @@
 //
 // interrupt sources
 //
+
 `define OC8051_ISRC_NO   3'b000  // no interrupts
 `define OC8051_ISRC_IE0  3'b001  // EXTERNAL INTERRUPT 0
 `define OC8051_ISRC_TF0  3'b010  // t/c owerflov 0

@@ -135,14 +135,14 @@ input   scanb_en;
       	.rce   ( rd_en          ),
       	.oe    ( 1'b1           ),
       	.raddr ( rd_addr        ),
-      	.do    ( rd_data        ),
+      	.data_o( rd_data        ),
       
       	.wclk  ( clk            ),
       	.wrst  ( rst            ),
       	.wce   ( wr_en          ),
       	.we    ( wr             ),
       	.waddr ( wr_addr        ),
-      	.di    ( wr_data        )
+      	.data_i( wr_data        )
       );
     
     `else

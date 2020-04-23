@@ -143,14 +143,14 @@ input   scanb_en;
       	.rce   ( en0            ),
       	.oe    ( 1'b1           ),
       	.raddr ( adr0           ),
-      	.do    ( dat0_o         ),
+      	.data_o( dat0_o         ),
       
       	.wclk  ( clk            ),
       	.wrst  ( rst            ),
       	.wce   ( en1            ),
       	.we    ( wr1            ),
       	.waddr ( adr1           ),
-      	.di    ( dat1_i         )
+      	.data_i( dat1_i         )
       );
     
     `else

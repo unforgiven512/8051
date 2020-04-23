@@ -63,48 +63,86 @@
 `include "oc8051_defines.v"
 
 
-module oc8051_alu_src_sel (clk, rst, rd, sel1, sel2, sel3,
-                     acc, ram, pc, dptr,
+module oc8051_alu_src_sel(
+	clk,
+	rst,
+	rd,
+	sel1,
+	sel2,
+	sel3,
+	acc,
+	ram,
+	pc,
+	dptr,
+	op1,
+	op2,
+	op3,
+	src1,
+	src2,
+	src3
+);
 
-                     op1, op2, op3,
+	input clk;
+	input rst;
+	input rd;
+	input sel3;
+	input [1:0] sel2;
+	input [2:0] sel1;
+	input [7:0] acc;
+	input [7:0] ram;
+	input [15:0] dptr;
+	input [15:0] pc;
+	input [7:0] op1;
+	input [7:0] op2;
+	input [7:0] op3;
 
-                     src1, src2, src3);
+	output [7:0] src1;
+	output [7:0] src2;
+	output [7:0] src3;
 
 
-input clk, rst, rd, sel3;
-input [1:0] sel2;
-input [2:0] sel1;
-input [7:0] acc, ram;
-input [15:0] dptr;
-input [15:0] pc;
+	reg [7:0] src1;
+	reg [7:0] src2;
+	reg [7:0] src3;
+
+	reg [7:0] op1_r;
+	reg [7:0] op2_r;
+	reg [7:0] op3_r;
 
 
-input [7:0] op1, op2, op3;
+	///////
+	//
+	// src1
+	//
+	///////
+	always @(sel1 or op1_r or op2_r or op3_r or pc or acc or ram)
+		begin
+			case (sel1) /* synopsys full_case parallel_case */
+				`OC8051_AS1_RAM:
+					src1 = ram;
 
-output [7:0] src1, src2, src3;
+				`OC8051_AS1_ACC:
+					src1 = acc;
 
-reg [7:0] src1, src2, src3;
+				`OC8051_AS1_OP1:
+					src1 = op1_r;
 
-reg [7:0] op1_r, op2_r, op3_r;
+				`OC8051_AS1_OP2:
+					src1 = op2_r;
 
-///////
-//
-// src1
-//
-///////
-always @(sel1 or op1_r or op2_r or op3_r or pc or acc or ram)
-begin
-  case (sel1) /* synopsys full_case parallel_case */
-    `OC8051_AS1_RAM: src1 = ram;
-    `OC8051_AS1_ACC: src1 = acc;
-    `OC8051_AS1_OP1: src1 = op1_r;
-    `OC8051_AS1_OP2: src1 = op2_r;
-    `OC8051_AS1_OP3: src1 = op3_r;
-    `OC8051_AS1_PCH: src1 = pc[15:8];
-    `OC8051_AS1_PCL: src1 = pc[7:0];
-//    default: src1 = 8'h00;
-  endcase
-end
+				`OC8051_AS1_OP3:
+					src1 = op3_r;
+
+				`OC8051_AS1_PCH:
+					src1 = pc[15:8];
+
+				`OC8051_AS1_PCL:
+					src1 = pc[7:0];
+
+//				default:
+//					src1 = 8'h00;
+			endcase
+		end
 
 ///////
 //
@@ -138,15 +176,22 @@ begin
 end
 
 
-always @(posedge clk or posedge rst)
-  if (rst) begin
-    op1_r <= #1 8'h00;
-    op2_r <= #1 8'h00;
-    op3_r <= #1 8'h00;
-  end else begin
-    op1_r <= #1 op1;
-    op2_r <= #1 op2;
-    op3_r <= #1 op3;
-  end
+	always @(posedge clk or posedge rst)
+		begin
+			if (rst)
+				begin
+					op1_r <= #1 8'h00;
+					op2_r <= #1 8'h00;
+					op3_r <= #1 8'h00;
+				end
+			else
+				begin
+					op1_r <= #1 op1;
+					op2_r <= #1 op2;
+					op3_r <= #1 op3;
+				end
+		end
+
+
 
 endmodule

@@ -95,66 +95,85 @@
 `include "oc8051_defines.v"
 
 
-module oc8051_sfr (rst, clk,
-       adr0, adr1, dat0, 
-       dat1, dat2, bit_in,
-       des_acc,
-       we, wr_bit,
-       bit_out,
-       wr_sfr, acc, 
-       ram_wr_sel, ram_rd_sel, 
-       sp, sp_w, 
-       bank_sel, 
-       desAc, desOv,
-       srcAc, cy,
-       psw_set, rmw,
-       comp_sel,
-       comp_wait,
+module oc8051_sfr(
+	rst,
+	clk,
+	adr0,
+	adr1,
+	dat0,
+	dat1,
+	dat2,
+	bit_in,
+	des_acc,
+	we,
+	wr_bit,
+	bit_out,
+	wr_sfr,
+	acc, 
+	ram_wr_sel,
+	ram_rd_sel, 
+	sp,
+	sp_w, 
+	bank_sel, 
+	desAc,
+	desOv,
+	srcAc,
+	cy,
+	psw_set,
+	rmw,
+	comp_sel,
+	comp_wait,
 
 `ifdef OC8051_PORTS
 
-  `ifdef OC8051_PORT0
-       p0_out,
-       p0_in,
-  `endif
+`ifdef OC8051_PORT0
+	p0_out,
+	p0_in,
+`endif
 
-  `ifdef OC8051_PORT1
-       p1_out,
-       p1_in,
-  `endif
+`ifdef OC8051_PORT1
+	p1_out,
+	p1_in,
+`endif
 
-  `ifdef OC8051_PORT2
-       p2_out,
-       p2_in,
-  `endif
+`ifdef OC8051_PORT2
+	p2_out,
+	p2_in,
+`endif
 
-  `ifdef OC8051_PORT3
-       p3_out,
-       p3_in,
-  `endif
+`ifdef OC8051_PORT3
+	p3_out,
+	p3_in,
+`endif
 
 `endif
 
+`ifdef OC8051_UART
+	rxd,
+	txd,
+`endif
 
-  `ifdef OC8051_UART
-       rxd, txd,
-  `endif
+	int_ack,
+	intr,
+	int0,
+	int1,
+	int_src,
+	reti,
 
-       int_ack, intr,
-       int0, int1,
-       int_src,
-       reti,
+`ifdef OC8051_TC01
+	t0,
+	t1,
+`endif
 
-  `ifdef OC8051_TC01
-       t0, t1,
-  `endif
+`ifdef OC8051_TC2
+	t2,
+	t2ex,
+`endif
 
-  `ifdef OC8051_TC2
-       t2, t2ex,
-  `endif
-
-       dptr_hi, dptr_lo,
-       wait_data);
+	dptr_hi,
+	dptr_lo,
+	wait_data
+);
 
 
 input       rst,	// reset - pin
@@ -195,40 +214,40 @@ output [7:0] dat0,	//data output
 output [7:0] sp,
              sp_w;
 
-// ports
+	// ports
 `ifdef OC8051_PORTS
 
 `ifdef OC8051_PORT0
-input  [7:0] p0_in;
-output [7:0] p0_out;
-wire   [7:0] p0_data;
+	input [7:0] p0_in;
+	output [7:0] p0_out;
+	wire [7:0] p0_data;
 `endif
 
 `ifdef OC8051_PORT1
-input  [7:0] p1_in;
-output [7:0] p1_out;
-wire   [7:0] p1_data;
+	input [7:0] p1_in;
+	output [7:0] p1_out;
+	wire [7:0] p1_data;
 `endif
 
 `ifdef OC8051_PORT2
-input  [7:0] p2_in;
-output [7:0] p2_out;
-wire   [7:0] p2_data;
+	input [7:0] p2_in;
+	output [7:0] p2_out;
+	wire [7:0] p2_data;
 `endif
 
 `ifdef OC8051_PORT3
-input  [7:0] p3_in;
-output [7:0] p3_out;
-wire   [7:0] p3_data;
+	input [7:0] p3_in;
+	output [7:0] p3_out;
+	wire [7:0] p3_data;
 `endif
 
 `endif
 
 
-// serial interface
+	// serial interface
 `ifdef OC8051_UART
-input        rxd;
-output       txd;
+	input rxd;
+	output txd;
 `endif
 
 // timer/counter 0,1
@@ -296,12 +315,12 @@ wire [7:0] b_reg,
 	   ip;
 
 
-reg        pres_ow;
-reg [3:0]  prescaler;
+	reg pres_ow;
+	reg [3:0] prescaler;
 
 
-assign cy = psw[7];
-assign srcAc = psw [6];
+	assign cy = psw[7];
+	assign srcAc = psw [6];
 
 
 
@@ -705,18 +724,24 @@ begin
     endcase
 end
 
-always @(posedge clk or posedge rst)
-begin
-  if (rst) begin
-    prescaler <= #1 4'h0;
-    pres_ow <= #1 1'b0;
-  end else if (prescaler==4'b1011) begin
-    prescaler <= #1 4'h0;
-    pres_ow <= #1 1'b1;
-  end else begin
-    prescaler <= #1 prescaler + 4'h1;
-    pres_ow <= #1 1'b0;
-  end
-end
+	always @(posedge clk or posedge rst)
+		begin
+			if (rst)
+				begin
+					prescaler <= #1 4'h0;
+					pres_ow <= #1 1'b0;
+				end
+			else if (prescaler == 4'b1011)
+				begin
+					prescaler <= #1 4'h0;
+					pres_ow <= #1 1'b1;
+				end 
+			else
+				begin
+					prescaler <= #1 prescaler + 4'h1;
+					pres_ow <= #1 1'b0;
+				end
+		end
+
 
 endmodule
