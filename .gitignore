@@ -2,11 +2,20 @@
 # .gitignore
 #
 
+
+## GENERIC ##
 *~
 *.bak
+**/~$*
 
 
+## OBJECT FILES ##
 *.o
 *.d
 *.i
+*.rel
 
+
+## BUILD ARTIFACTS (SDCC) ##
+asm/*.hex
+asm/*.ihx
